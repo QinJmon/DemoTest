@@ -1,0 +1,42 @@
+type Query{
+    users:[User]
+    findByName(name:String!):User
+    findByName2(name:String!):User
+}
+
+type User{
+    id:ID
+    name:String
+    age:Int
+    sex:String
+
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation{
+    createUser(input:CreateUserInput):User
+    updateUser(changes:UpdateUserInput!):User
+    #根据名字修改年龄
+    updateAgeByName(name:String!,age:Int!):User
+    deleteUser(id:ID!):DeletionStatus
+}
+
+input CreateUserInput{
+    name:String!
+    age:Int!
+    sex:String!
+}
+
+input UpdateUserInput{
+    name:String
+    age:Int
+    sex:String
+}
+
+type DeletionStatus{
+    success:Boolean!
+}
